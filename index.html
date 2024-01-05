@@ -94,7 +94,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>视频分镜参考图生成工具</h1>
+        <h1>视频分镜配图生成器</h1>
         <input type="text" id="apiKey" placeholder="请输入 OpenAI 的 API 密钥">
         <textarea id="scriptInput" rows="10" placeholder="请输入分镜内容，每行一个镜头，可包含景别、视角、道具等"></textarea>
         <textarea id="presetInput" rows="4" placeholder="输入预设提示词，例如：场景描述、人物年龄、外貌、服饰等"></textarea>
@@ -222,7 +222,7 @@ function generateDescription(prompt) {
         // 逐个处理每个镜头
         generateButton.addEventListener('click', function() {
             Array.from(scriptTable.rows).forEach((row, index) => {
-                const fullPrompt = `你是一名经验丰富的分镜脚本绘图师，需要为拍摄团队描述每一个分镜头的画面内容。分镜头的人物、场景等基本信息如下：${row.cells[1].textContent} 分镜头的画面内容如下${presetInput.value.trim()}\n每次只描述一个镜头的画面内容，按照以下信息结构输出描述文本：画面的景别（从分镜头的画面内容摘取相关文本），画面的场景（从基本信息中摘取相关文本，要详细展开描述场景），人物外貌（从基本信息中摘取相关文本，要详细展开描述人物的外貌、穿着，避免遗漏任何信息，但不要摘取人物的名字），人物动作（从分镜头的画面内容摘取相关文本），其他画面内容，比如使用的相机、镜头焦段、布光方式等，这一部分请你根据画面内容来设计。注意：1、基本信息里可能包含多个人物或场景，你在描述每个画面的时候，只需要选取画面内容涉及到的人物和场景，不要加入无关的元素；2、不要把人物的名字、括号里的东西写出来，也不要包含类似这是一个电影分镜的相关表述，你输出的信息应该是一段对画面的完整描述，以便拍摄团队能够理解这一个分镜头的画面内容，只有这个画面的景别、场景，人物的外貌和动作，以及你补充的画面内容，以英文书写，参照以下格式：A panoramic view set in a cozy living room, featuring a Chinese girl, 20 years old, with short hair, 155 cm tall, slim and slender. She is peacefully sleeping, exuding a serene aura. She's dressed in a white shirt paired with black pants, tucked into sturdy white sneakers. The blanket is blue, creating a tranquil atmosphere. The room is well-ventilated, offering a refreshing ambience. The image should resemble a realistic photograph, shot with a EOS R8 camera, using a 24mm wide-angle lens, with soft and natural lighting.`;
+                const fullPrompt = `你是一名经验丰富的分镜脚本绘图师，需要为拍摄团队描述每一个分镜头的画面内容。分镜头的人物、场景等基本信息如下：${row.cells[1].textContent} 分镜头的画面内容如下${presetInput.value.trim()}\n每次只描述一个镜头的画面内容，按照以下信息结构输出描述文本：画面的景别（从分镜头的画面内容摘取相关文本），画面的场景（从基本信息中摘取相关文本，要详细展开描述场景），人物外貌（从基本信息中摘取相关文本，要详细展开描述人物的外貌、穿着，避免遗漏任何信息，但不要摘取人物的名字），人物动作（从分镜头的画面内容摘取相关文本），其他画面内容，比如使用的相机、镜头焦段、布光方式等，这一部分请你根据画面内容来设计。注意：1、基本信息里可能包含多个人物或场景，你在描述每个画面的时候，只需要选取画面内容涉及到的人物和场景，不要加入无关的元素；2、所有文本只可以输出为一个段落，不允许折行；3、不要把人物的名字、括号里的东西写出来，也不要包含类似这是一个电影分镜的相关表述，你输出的信息应该是一段对画面的完整描述，以便拍摄团队能够理解这一个分镜头的画面内容，只有这个画面的景别、场景，人物的外貌和动作，以及你补充的画面内容，以英文书写，参照以下格式：A panoramic view set in a cozy living room, featuring a Chinese girl, 20 years old, with short hair, 155 cm tall, slim and slender. She is peacefully sleeping, exuding a serene aura. She's dressed in a white shirt paired with black pants, tucked into sturdy white sneakers. The blanket is blue, creating a tranquil atmosphere. The room is well-ventilated, offering a refreshing ambience. The image should resemble a realistic photograph, shot with a EOS R8 camera, using a 24mm wide-angle lens, with soft and natural lighting.`;
                 generateDescription(fullPrompt).then(description => {
                     row.cells[2].textContent = description; // 更新提示词列
                     return generateImage(description);
