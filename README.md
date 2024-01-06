@@ -2,6 +2,8 @@
 
 **StorySketch** 是一个创新的工具，专为视频制作人和导演设计，用于将分镜脚本快速转化为直观的视觉参考图。这款工具结合了最新的 AI 技术，能够根据脚本内容自动生成高质量的分镜配图，帮助创作者更加直观地理解和展现他们的创意。
 
+在线使用：[https://roblinka.github.io/StorySketch/](https://roblinka.github.io/StorySketch/)
+
 ## 主要特点
 
 - **快速生成**：输入您的分镜脚本，一键生成详细的视觉参考图。
