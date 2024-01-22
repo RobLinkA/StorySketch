@@ -156,6 +156,13 @@
         const scriptTable = document.getElementById('scriptTable').getElementsByTagName('tbody')[0];
         const totalShots = document.getElementById('totalShots');
 
+        // 从 URL 查询参数中自动填充 API Key
+        const queryParams = new URLSearchParams(window.location.search);
+        const apiKey = queryParams.get('key');
+        if (apiKey) {
+            apiKeyInput.value = apiKey;
+        }
+
         // 读取并显示分镜脚本内容
         readScriptButton.addEventListener('click', () => {
             const lines = scriptInput.value.trim().split('\n');
